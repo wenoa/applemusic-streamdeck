@@ -1,0 +1,113 @@
+{
+  "Name": "Apple Music",
+  "Version": "1.0.0.0",
+  "Author": "Wenoa Studio",
+  "Actions": [
+    {
+      "Name": "Now Playing",
+      "UUID": "studio.wenoa.applemusic.now-playing",
+      "Icon": "imgs/actions/now-playing",
+      "Tooltip": "Shows the cover of the playing track; press to play or pause",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/now-playing-key"
+        }
+      ]
+    },
+    {
+      "Name": "Favorite",
+      "UUID": "studio.wenoa.applemusic.favorite",
+      "Icon": "imgs/actions/favorite",
+      "Tooltip": "Favorites or unfavorites the playing track",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/favorite-key"
+        }
+      ]
+    },
+    {
+      "Name": "Previous Track",
+      "UUID": "studio.wenoa.applemusic.previous-track",
+      "Icon": "imgs/actions/previous-track",
+      "Tooltip": "Goes back to the previous track",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/previous-track-key"
+        }
+      ]
+    },
+    {
+      "Name": "Next Track",
+      "UUID": "studio.wenoa.applemusic.next-track",
+      "Icon": "imgs/actions/next-track",
+      "Tooltip": "Skips to the next track",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/next-track-key"
+        }
+      ]
+    },
+    {
+      "Name": "Volume",
+      "UUID": "studio.wenoa.applemusic.volume",
+      "Icon": "imgs/actions/volume",
+      "Tooltip": "Raises or lowers the volume of Apple Music by a percentage",
+      "PropertyInspectorPath": "ui/volume.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/volume-key"
+        }
+      ]
+    },
+    {
+      "Name": "Playlist",
+      "UUID": "studio.wenoa.applemusic.playlist",
+      "Icon": "imgs/actions/playlist",
+      "Tooltip": "Plays one of your playlists",
+      "PropertyInspectorPath": "ui/playlist.html",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/playlist-key"
+        }
+      ]
+    }
+  ],
+  "Category": "Apple Music",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Description": "Control Apple Music from your Stream Deck.",
+  "Icon": "imgs/plugin/marketplace",
+  "SDKVersion": 3,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "27"
+    }
+  ],
+  "Nodejs": {
+    "Version": "24",
+    "Debug": "enabled"
+  },
+  "UUID": "studio.wenoa.applemusic"
+}

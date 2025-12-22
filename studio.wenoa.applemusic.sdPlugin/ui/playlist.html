@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Playlist Settings</title>
+  <meta charset="utf-8" />
+  <script src="../bin/sdpi-components.js"></script>
+  <script>
+    SDPIComponents.i18n.locales = {
+      en: {
+        playlist: "Playlist",
+        choose: "Choose a playlist",
+      },
+      es: {
+        playlist: "Playlist",
+        choose: "Elegí una playlist",
+      },
+    };
+  </script>
+</head>
+
+<body>
+  <sdpi-item label="__MSG_playlist__">
+    <sdpi-select setting="playlist" label-setting="playlistName" datasource="getPlaylists" show-refresh placeholder="__MSG_choose__"></sdpi-select>
+  </sdpi-item>
+</body>
+
+</html>

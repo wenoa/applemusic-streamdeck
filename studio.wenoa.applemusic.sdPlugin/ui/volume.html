@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Volume Settings</title>
+  <meta charset="utf-8" />
+  <script src="../bin/sdpi-components.js"></script>
+  <script>
+    SDPIComponents.i18n.locales = {
+      en: {
+        change: "Change (%)",
+        example: "25 raises, -25 lowers",
+      },
+      es: {
+        change: "Cambio (%)",
+        example: "25 sube, -25 baja",
+      },
+    };
+  </script>
+</head>
+
+<body>
+  <sdpi-item label="__MSG_change__">
+    <sdpi-textfield setting="volumeChange" pattern="-?(100|[1-9][0-9]?)" placeholder="__MSG_example__" required></sdpi-textfield>
+  </sdpi-item>
+</body>
+
+</html>
