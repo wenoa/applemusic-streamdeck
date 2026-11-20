@@ -2,6 +2,7 @@
 /* v8 ignore file -- @preserve */
 import streamDeck from "@elgato/streamdeck";
 import { spawnSync } from "node:child_process";
+import { chmodSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { AppleMusicActions } from "./actions/apple-music-actions";
 import { StreamDeckPropertyInspector } from "./actions/property-inspector";
@@ -12,8 +13,11 @@ import { ProcessMusicBridge } from "./music/bridge/process-music-bridge";
 import { AppleCatalog } from "./music/catalog/apple-catalog";
 import { CatalogCovers } from "./music/catalog/catalog-covers";
 
+const bridgeExecutable = fileURLToPath(new URL("music-bridge", import.meta.url));
+// `streamdeck pack` doesn't keep the executable bit, so an installed plugin gets the bridge without it.
+chmodSync(bridgeExecutable, 0o755);
 const bridge = new ProcessMusicBridge(
-  fileURLToPath(new URL("music-bridge", import.meta.url)),
+  bridgeExecutable,
   [],
   streamDeck.logger,
   new TimeoutTimer(5000),
