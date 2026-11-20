@@ -1,6 +1,6 @@
 {
   "name": "applemusic-streamdeck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Stream Deck plugin to control Apple Music",
   "author": "Wenoa Studio <https://wenoa.studio>",
   "license": "MIT",
