@@ -1,0 +1,29 @@
+{
+  "Name": "Apple Music",
+  "Description": "Control Apple Music from your Stream Deck.",
+  "Category": "Apple Music",
+  "studio.wenoa.applemusic.now-playing": {
+    "Name": "Now Playing",
+    "Tooltip": "Shows the cover of the playing track; press to play or pause"
+  },
+  "studio.wenoa.applemusic.favorite": {
+    "Name": "Favorite",
+    "Tooltip": "Favorites or unfavorites the playing track"
+  },
+  "studio.wenoa.applemusic.previous-track": {
+    "Name": "Previous Track",
+    "Tooltip": "Goes back to the previous track"
+  },
+  "studio.wenoa.applemusic.next-track": {
+    "Name": "Next Track",
+    "Tooltip": "Skips to the next track"
+  },
+  "studio.wenoa.applemusic.volume": {
+    "Name": "Volume",
+    "Tooltip": "Raises or lowers the volume of Apple Music by a percentage"
+  },
+  "studio.wenoa.applemusic.playlist": {
+    "Name": "Playlist",
+    "Tooltip": "Plays one of your playlists"
+  }
+}
