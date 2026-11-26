@@ -1,5 +1,5 @@
 {
-  "Name": "Apple Music",
+  "Name": "Controls for Apple Music",
   "Version": "0.1.1.0",
   "Author": "Wenoa Studio",
   "Actions": [
@@ -90,10 +90,10 @@
       ]
     }
   ],
-  "Category": "Apple Music",
+  "Category": "Controls for Apple Music",
   "CategoryIcon": "imgs/plugin/category-icon",
   "CodePath": "bin/plugin.js",
-  "Description": "Control Apple Music from your Stream Deck.",
+  "Description": "See the cover of the playing track, play and pause, favorite tracks, skip tracks, change the volume and play your playlists in Apple Music.",
   "Icon": "imgs/plugin/marketplace",
   "SDKVersion": 3,
   "Software": {

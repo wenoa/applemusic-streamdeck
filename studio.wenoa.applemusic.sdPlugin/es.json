@@ -1,7 +1,7 @@
 {
-  "Name": "Apple Music",
-  "Description": "Controlá Apple Music desde tu Stream Deck.",
-  "Category": "Apple Music",
+  "Name": "Controles para Apple Music",
+  "Description": "Mirá la portada del tema que suena, reproducí y pausá, marcá favoritos, pasá de tema, cambiá el volumen y reproducí tus playlists en Apple Music.",
+  "Category": "Controles para Apple Music",
   "studio.wenoa.applemusic.now-playing": {
     "Name": "Sonando ahora",
     "Tooltip": "Muestra la carátula del tema que suena; al presionarlo reproduce o pausa"

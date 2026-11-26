@@ -1,7 +1,7 @@
 {
-  "Name": "Apple Music",
-  "Description": "Control Apple Music from your Stream Deck.",
-  "Category": "Apple Music",
+  "Name": "Controls for Apple Music",
+  "Description": "See the cover of the playing track, play and pause, favorite tracks, skip tracks, change the volume and play your playlists in Apple Music.",
+  "Category": "Controls for Apple Music",
   "studio.wenoa.applemusic.now-playing": {
     "Name": "Now Playing",
     "Tooltip": "Shows the cover of the playing track; press to play or pause"
