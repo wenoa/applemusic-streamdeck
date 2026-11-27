@@ -1,10 +1,11 @@
 import AppKit
 @testable import MusicBridge
 
-final class FakeMusicScript: AppleScriptHandlers {
+final class FakeMusicScript: MusicScript {
   private var replies: [String: NSAppleEventDescriptor] = [:]
   private var failures: [String: AppleScriptFailure] = [:]
   private var calls: [(handler: String, arguments: [NSAppleEventDescriptor])] = []
+  private var quitting: (application: FakeMusicApplication, handler: String)?
 
   func replying(to handlerName: String, with reply: NSAppleEventDescriptor) -> FakeMusicScript {
     replies[handlerName] = reply
@@ -18,8 +19,26 @@ final class FakeMusicScript: AppleScriptHandlers {
     return self
   }
 
-  func call(_ handlerName: String, with arguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor {
+  // Music quits between two of the Apple Events of that handler, the next time it runs.
+  func quittingMusic(_ application: FakeMusicApplication, during handlerName: String) -> FakeMusicScript {
+    quitting = (application: application, handler: handlerName)
+
+    return self
+  }
+
+  func call(_ handlerName: String, on aMusicProcess: NSAppleEventDescriptor, with arguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor {
     calls.append((handler: handlerName, arguments: arguments))
+
+    guard aMusicProcess == FakeMusicApplication.process else {
+      throw AppleScriptFailure(number: -600, message: "Application isn't running.")
+    }
+
+    // Like AppleScript: the events left in the handler fail, because the process they are addressed to quit.
+    if let quitting, quitting.handler == handlerName {
+      self.quitting = nil
+      quitting.application.quit()
+      throw AppleScriptFailure(number: -609, message: "Connection is invalid.")
+    }
 
     if let failure = failures[handlerName] {
       throw failure
@@ -42,7 +61,9 @@ final class FakeMusicScript: AppleScriptHandlers {
 }
 
 final class FakeMusicApplication: MusicApplication {
-  var isRunning: Bool
+  static let process = NSAppleEventDescriptor(processIdentifier: 4242)
+
+  private var isRunning: Bool
   private(set) var openings = 0
   private(set) var automationPermissionRevelations = 0
 
@@ -50,8 +71,20 @@ final class FakeMusicApplication: MusicApplication {
     self.isRunning = isRunning
   }
 
+  func runningProcess() throws -> NSAppleEventDescriptor {
+    guard isRunning else {
+      throw MusicIsClosed()
+    }
+
+    return Self.process
+  }
+
   func open() {
     openings += 1
+  }
+
+  func quit() {
+    isRunning = false
   }
 
   func revealAutomationPermission() {

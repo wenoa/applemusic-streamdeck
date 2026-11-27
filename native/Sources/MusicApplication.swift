@@ -1,7 +1,8 @@
 import AppKit
 
 protocol MusicApplication {
-  var isRunning: Bool { get }
+  // The running Music process, the one Apple Events are sent to; MusicIsClosed while Music is closed.
+  func runningProcess() throws -> NSAppleEventDescriptor
 
   func open()
 
@@ -12,10 +13,18 @@ struct InstalledMusicApplication: MusicApplication {
   private static let bundleIdentifier = "com.apple.Music"
   private static let automationSettings = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation")!
 
-  var isRunning: Bool {
-    NSRunningApplication
+  // AppleScript addresses a process by its serial number; the conversion fails once the process is gone.
+  func runningProcess() throws -> NSAppleEventDescriptor {
+    guard let process = NSRunningApplication
       .runningApplications(withBundleIdentifier: Self.bundleIdentifier)
-      .contains { application in !application.isTerminated }
+      .first(where: { application in !application.isTerminated })
+      .flatMap({ application in
+        NSAppleEventDescriptor(processIdentifier: application.processIdentifier).coerce(toDescriptorType: typeProcessSerialNumber)
+      }) else {
+      throw MusicIsClosed()
+    }
+
+    return process
   }
 
   func open() {

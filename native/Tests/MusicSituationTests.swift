@@ -35,6 +35,19 @@ import Testing
     #expect(plugin.logs.count == 1)
   }
 
+  @Test func doesNotOpenAgainAMusicThatQuitsWhileItsSituationIsRead() {
+    let application = FakeMusicApplication(isRunning: true)
+    let script = FakeMusicScript()
+      .replying(to: "snapshot", with: Descriptors.list([Descriptors.text("stopped")]))
+      .quittingMusic(application, during: "snapshot")
+    let music = Music.controlling(script, through: application, reportingTo: plugin)
+
+    music.reportSituation()
+    music.reportSituation()
+
+    #expect(plugin.events() == [["type": "stopped"], ["type": "closed"]])
+  }
+
   @Test func reportsStoppedWhenMusicIsStopped() {
     let script = FakeMusicScript().replying(to: "snapshot", with: Descriptors.list([Descriptors.text("stopped")]))
 

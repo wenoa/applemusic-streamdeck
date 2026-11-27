@@ -20,7 +20,12 @@ protocol AppleScriptHandlers {
   func call(_ aHandlerName: String, with someArguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor
 }
 
-final class AppleScriptLibrary: AppleScriptHandlers {
+// The handlers of the Music script, each one addressed to a running Music process.
+protocol MusicScript {
+  func call(_ aHandlerName: String, on aMusicProcess: NSAppleEventDescriptor, with someArguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor
+}
+
+final class AppleScriptLibrary: MusicScript {
   private let script: NSAppleScript
 
   private init(script aScript: NSAppleScript) {
@@ -38,9 +43,10 @@ final class AppleScriptLibrary: AppleScriptHandlers {
     return AppleScriptLibrary(script: script)
   }
 
-  func call(_ aHandlerName: String, with someArguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor {
+  func call(_ aHandlerName: String, on aMusicProcess: NSAppleEventDescriptor, with someArguments: [NSAppleEventDescriptor]) throws -> NSAppleEventDescriptor {
     var errorInformation: NSDictionary?
-    let result = script.executeAppleEvent(subroutineEvent(calling: aHandlerName, with: someArguments), error: &errorInformation)
+    // Every handler receives the Music process it talks to as its first parameter.
+    let result = script.executeAppleEvent(subroutineEvent(calling: aHandlerName, with: [aMusicProcess] + someArguments), error: &errorInformation)
 
     guard errorInformation == nil else {
       throw AppleScriptFailure.from(errorInformation)

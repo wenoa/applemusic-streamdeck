@@ -30,8 +30,8 @@ final class Music {
     )
   }
 
-  static func controlling(_ aScript: AppleScriptHandlers, through anApplication: MusicApplication, reportingTo aPlugin: PluginConnection) -> Music {
-    let handlers = HandlersOfOpenMusic(handlers: aScript, application: anApplication)
+  static func controlling(_ aScript: MusicScript, through anApplication: MusicApplication, reportingTo aPlugin: PluginConnection) -> Music {
+    let handlers = HandlersOfOpenMusic(script: aScript, application: anApplication)
 
     return Music(
       script: handlers,

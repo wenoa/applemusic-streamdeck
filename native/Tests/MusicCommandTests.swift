@@ -60,6 +60,17 @@ import Testing
     #expect(plugin.events() == [["type": "closed"]])
   }
 
+  @Test func doesNotOpenAgainAMusicThatQuitsDuringACommand() {
+    let application = FakeMusicApplication(isRunning: true)
+    _ = script.quittingMusic(application, during: "togglePlayback")
+
+    PluginCommandRegistry()
+      .command(from: ["command": "togglePlayback"])
+      .execute(on: Music.controlling(script, through: application, reportingTo: plugin))
+
+    #expect(plugin.events() == [["type": "closed"]])
+  }
+
   @Test func logsAFailedCommand() {
     _ = script.failing("togglePlayback", with: AppleScriptFailure(number: -1728, message: "no track"))
 
